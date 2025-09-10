@@ -1,8 +1,10 @@
-## [0.1.0] - 2024-09-10 - Initial Release
+## [0.1.0] - 2024-09-10 - Initial R### 📦 Dependencies
 
-### 🚀 Core Features[1.0.0] - 2024-09-10 - Initial Release
+- `hive: ^2.2.3` - High-perf### 🔒 Security Features
 
-### � Core Features
+- **AES Encryption**: Industry-standard encryption for sensitive dataance NoSQL databasease
+
+### 🚀 Core Features
 
 - **High-Performance Caching** with Hive NoSQL storage backend
 - **Clean Architecture** following Domain-Driven Design principles
@@ -35,7 +37,7 @@
 - **Application Layer**: Providers and dependency injection
 - **Utils Layer**: Encryption and background cleanup utilities
 
-### � Dependencies
+### 📦 Dependencies
 
 - `hive: ^2.2.3` - High-performance NoSQL database
 - `hive_flutter: ^1.1.0` - Flutter integration for Hive
@@ -82,7 +84,7 @@
 - **E-commerce Applications**: Product and cart data management
 - **Enterprise Security**: Banking and medical data examples
 
-### � Security Features
+### 🔒 Security Features
 
 - **AES Encryption**: Industry-standard encryption for sensitive data
 - **Key Management**: Flexible encryption key handling
