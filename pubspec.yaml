@@ -3,7 +3,6 @@ description: "A high-performance, user-friendly, and secure cache manager for Fl
 version: 0.1.2
 homepage: https://github.com/Kidpech-code/cache_manager_lite
 repository: https://github.com/Kidpech-code/cache_manager_lite
-issue_tracker: https://github.com/Kidpech-code/cache_manager_lite/issues
 documentation: https://github.com/Kidpech-code/cache_manager_lite#readme
 
 environment:
