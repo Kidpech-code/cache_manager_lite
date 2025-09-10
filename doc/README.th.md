@@ -29,7 +29,7 @@
 
 ```yaml
 dependencies:
-  cache_manager_lite: ^0.1.2
+  cache_manager_lite: ^1.0.0
 ```
 
 จากนั้นรัน:
@@ -64,7 +64,7 @@ cd my_cache_app
 dependencies:
   flutter:
     sdk: flutter
-  cache_manager_lite: ^0.1.2 # เพิ่มบรรทัดนี้
+  cache_manager_lite: ^1.0.0 # เพิ่มบรรทัดนี้
 
 dev_dependencies:
   flutter_test:

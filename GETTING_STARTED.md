@@ -61,7 +61,7 @@ dependencies:
     sdk: flutter
 
   # เพิ่มบรรทัดนี้
-  cache_manager_lite: ^0.1.2
+  cache_manager_lite: ^1.0.0
 
 dev_dependencies:
   flutter_test:

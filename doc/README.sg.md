@@ -29,7 +29,7 @@ Tambahkan ini ke fail `pubspec.yaml` pakej anda:
 
 ```yaml
 dependencies:
-  cache_manager_lite: ^0.1.2
+  cache_manager_lite: ^1.0.0
 ```
 
 Kemudian jalankan:
@@ -64,7 +64,7 @@ Edit fail `pubspec.yaml` anda:
 dependencies:
   flutter:
     sdk: flutter
-  cache_manager_lite: ^0.1.2 # Tambah baris ini
+  cache_manager_lite: ^1.0.0 # Tambah baris ini
 
 dev_dependencies:
   flutter_test:

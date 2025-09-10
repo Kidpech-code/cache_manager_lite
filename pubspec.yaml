@@ -1,6 +1,6 @@
 name: cache_manager_lite
 description: "A high-performance, user-friendly, and secure cache manager for Flutter, designed for maximum flexibility and developer productivity."
-version: 0.1.2
+version: 1.0.0
 homepage: https://github.com/Kidpech-code/cache_manager_lite
 repository: https://github.com/Kidpech-code/cache_manager_lite
 documentation: https://github.com/Kidpech-code/cache_manager_lite#readme
