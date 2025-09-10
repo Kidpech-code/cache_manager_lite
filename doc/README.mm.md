@@ -29,7 +29,7 @@ Flutter အတွက် စွမ်းဆောင်ရည်မြင့်�
 
 ```yaml
 dependencies:
-  cache_manager_lite: ^0.1.0
+  cache_manager_lite: ^0.1.1
 ```
 
 ထို့နောက် run လုပ်ပါ:
@@ -64,7 +64,7 @@ cd my_cache_app
 dependencies:
   flutter:
     sdk: flutter
-  cache_manager_lite: ^0.1.0 # ဤလိုင်းကို ထည့်ပါ
+  cache_manager_lite: ^0.1.1 # ဤလိုင်းကို ထည့်ပါ
 
 dev_dependencies:
   flutter_test:

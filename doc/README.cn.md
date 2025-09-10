@@ -29,7 +29,7 @@
 
 ```yaml
 dependencies:
-  cache_manager_lite: ^0.1.0
+  cache_manager_lite: ^0.1.1
 ```
 
 然后运行：
@@ -64,7 +64,7 @@ cd my_cache_app
 dependencies:
   flutter:
     sdk: flutter
-  cache_manager_lite: ^0.1.0 # 添加此行
+  cache_manager_lite: ^0.1.1 # 添加此行
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,8 @@
+## [0.1.1] - 2025-09-10
+
+### Added
+- Version bump to 0.1.1
+
 ## [0.1.0] - 2024-09-10 - Initial R### 📦 Dependencies
 
 - `hive: ^2.2.3` - High-perf### 🔒 Security Features
