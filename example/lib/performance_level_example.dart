@@ -7,7 +7,8 @@ class PerformanceLevelExample extends StatefulWidget {
   const PerformanceLevelExample({super.key});
 
   @override
-  State<PerformanceLevelExample> createState() => _PerformanceLevelExampleState();
+  State<PerformanceLevelExample> createState() =>
+      _PerformanceLevelExampleState();
 }
 
 class _PerformanceLevelExampleState extends State<PerformanceLevelExample> {
@@ -185,10 +186,11 @@ class _PerformanceLevelExampleState extends State<PerformanceLevelExample> {
                         SizedBox(width: 12),
                         Text(
                           'Current: ${config['name']}',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                color: config['color'],
-                                fontWeight: FontWeight.bold,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: config['color'],
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ],
                     ),
@@ -303,7 +305,9 @@ class _PerformanceLevelExampleState extends State<PerformanceLevelExample> {
                                     style: TextStyle(
                                       fontFamily: 'monospace',
                                       fontSize: 12,
-                                      color: index == 0 ? config['color'] : Colors.grey.shade700,
+                                      color: index == 0
+                                          ? config['color']
+                                          : Colors.grey.shade700,
                                     ),
                                   ),
                                 );

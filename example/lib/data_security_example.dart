@@ -75,7 +75,8 @@ class _DataSecurityExampleState extends State<DataSecurityExample> {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.security, color: Colors.deepPurple, size: 32),
+                        Icon(Icons.security,
+                            color: Colors.deepPurple, size: 32),
                         SizedBox(width: 12),
                         Expanded(
                           child: Column(
@@ -83,7 +84,8 @@ class _DataSecurityExampleState extends State<DataSecurityExample> {
                             children: [
                               Text(
                                 'Data Security Features',
-                                style: Theme.of(context).textTheme.headlineSmall,
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
                               ),
                               Text(
                                 'Demonstrating AES encryption and secure caching',
@@ -128,7 +130,8 @@ class _DataSecurityExampleState extends State<DataSecurityExample> {
                         fontSize: 12,
                       ),
                     ),
-                    backgroundColor: config['enabled'] ? Colors.green : Colors.grey,
+                    backgroundColor:
+                        config['enabled'] ? Colors.green : Colors.grey,
                   ),
                 ),
               );
@@ -272,13 +275,16 @@ class _DataSecurityExampleState extends State<DataSecurityExample> {
                               itemBuilder: (context, index) {
                                 final log = logs[index];
                                 Color textColor = Colors.grey.shade700;
-                                if (log.contains('🔐')) textColor = Colors.green;
-                                if (log.contains('⚠️')) textColor = Colors.orange;
+                                if (log.contains('🔐'))
+                                  textColor = Colors.green;
+                                if (log.contains('⚠️'))
+                                  textColor = Colors.orange;
                                 if (log.contains('❌')) textColor = Colors.red;
                                 if (log.contains('✅')) textColor = Colors.blue;
 
                                 return Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 2.0),
                                   child: Text(
                                     log,
                                     style: TextStyle(
@@ -381,7 +387,8 @@ class _DataSecurityExampleState extends State<DataSecurityExample> {
 
       _addLog('✅ Sensitive data secured with enterprise encryption');
       _addLog('⏰ Short expiration: ${info?.remainingTime ?? "N/A"}');
-      _addLog('🔐 Encryption status: ${info?.isEncrypted == true ? "Enabled" : "Disabled"}');
+      _addLog(
+          '🔐 Encryption status: ${info?.isEncrypted == true ? "Enabled" : "Disabled"}');
     } catch (e) {
       _addLog('❌ Sensitive data test failed: $e');
     }
@@ -402,7 +409,8 @@ class _DataSecurityExampleState extends State<DataSecurityExample> {
       };
 
       // Use rotating encryption key for maximum security
-      final paymentKey = 'payment-ultra-secure-${DateTime.now().millisecondsSinceEpoch}';
+      final paymentKey =
+          'payment-ultra-secure-${DateTime.now().millisecondsSinceEpoch}';
 
       await secureCache.put(
         key: 'payment_transaction',
@@ -421,7 +429,8 @@ class _DataSecurityExampleState extends State<DataSecurityExample> {
       // Verify security
       final info = await secureCache.getEntryInfo('payment_transaction');
       if (info != null) {
-        _addLog('🕒 Remaining time: ${info.remainingTime?.inMinutes ?? 0} minutes');
+        _addLog(
+            '🕒 Remaining time: ${info.remainingTime?.inMinutes ?? 0} minutes');
         _addLog('🔐 Encryption verified: ${info.isEncrypted}');
       }
     } catch (e) {

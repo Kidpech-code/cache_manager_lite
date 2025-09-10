@@ -17,25 +17,25 @@ class _AppScaleExampleState extends State<AppScaleExample> {
 
   final Map<String, CacheManagerLite Function()> scaleConfigs = {
     'Small App (Utility)': () => CacheManagerLite.small(
-      appType: AppType.utility,
-      enableEncryption: false,
-    ),
+          appType: AppType.utility,
+          enableEncryption: false,
+        ),
     'Small App (Productivity)': () => CacheManagerLite.small(
-      appType: AppType.utility,
-      enableEncryption: true,
-    ),
+          appType: AppType.utility,
+          enableEncryption: true,
+        ),
     'Medium App (Social)': () => CacheManagerLite.medium(
-      appType: AppType.social,
-    ),
+          appType: AppType.social,
+        ),
     'Medium App (ECommerce)': () => CacheManagerLite.medium(
-      appType: AppType.ecommerce,
-    ),
+          appType: AppType.ecommerce,
+        ),
     'Large App (Gaming)': () => CacheManagerLite.large(
-      appType: AppType.gaming,
-    ),
+          appType: AppType.gaming,
+        ),
     'Enterprise (News)': () => CacheManagerLite.enterprise(
-      appType: AppType.news,
-    ),
+          appType: AppType.news,
+        ),
   };
 
   @override
@@ -60,7 +60,8 @@ class _AppScaleExampleState extends State<AppScaleExample> {
       setState(() {
         cacheStats = {
           'Cache Size': _formatBytes(config.maxCacheSize),
-          'Default Duration': _formatDuration(config.defaultPolicy.maxAge ?? Duration(hours: 1)),
+          'Default Duration': _formatDuration(
+              config.defaultPolicy.maxAge ?? Duration(hours: 1)),
           'Cache Type': 'Hive Storage',
           'Status': 'Active',
         };
@@ -73,20 +74,20 @@ class _AppScaleExampleState extends State<AppScaleExample> {
 
     try {
       final cacheManager = scaleConfigs[scale]!();
-      
+
       // Test cache operations
       final stopwatch = Stopwatch()..start();
       await cacheManager.put(
-        key: 'test_key', 
-        value: {'timestamp': DateTime.now().toIso8601String()}
-      );
+          key: 'test_key',
+          value: {'timestamp': DateTime.now().toIso8601String()});
       await cacheManager.get('test_key');
       stopwatch.stop();
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('✅ $scale tested! Time: ${stopwatch.elapsedMilliseconds}ms'),
+            content: Text(
+                '✅ $scale tested! Time: ${stopwatch.elapsedMilliseconds}ms'),
             backgroundColor: Colors.green,
           ),
         );
@@ -130,7 +131,7 @@ class _AppScaleExampleState extends State<AppScaleExample> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 12),
-            
+
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -139,7 +140,8 @@ class _AppScaleExampleState extends State<AppScaleExample> {
                 return ElevatedButton(
                   onPressed: () => _selectScale(scale),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isSelected ? Colors.blue : Colors.grey.shade200,
+                    backgroundColor:
+                        isSelected ? Colors.blue : Colors.grey.shade200,
                     foregroundColor: isSelected ? Colors.white : Colors.black87,
                   ),
                   child: Text(scale),
@@ -197,7 +199,7 @@ class _AppScaleExampleState extends State<AppScaleExample> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 12),
-            
+
             Wrap(
               spacing: 8,
               runSpacing: 8,

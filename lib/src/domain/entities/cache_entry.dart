@@ -228,9 +228,8 @@ class CacheEntry {
       key: json['key'],
       value: json['value'],
       createdAt: DateTime.parse(json['createdAt']),
-      expiresAt: json['expiresAt'] != null
-          ? DateTime.parse(json['expiresAt'])
-          : null,
+      expiresAt:
+          json['expiresAt'] != null ? DateTime.parse(json['expiresAt']) : null,
       isEncrypted: json['isEncrypted'] ?? false,
     );
   }

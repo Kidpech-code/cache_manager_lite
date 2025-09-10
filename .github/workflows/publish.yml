@@ -1,0 +1,139 @@
+name: Publish to pub.dev
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to publish (e.g., v0.1.0)"
+        required: true
+        type: string
+
+jobs:
+  test:
+    name: Test Package
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.0"
+          channel: "stable"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze project source
+        run: dart analyze --fatal-infos
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Check publish warnings
+        run: dart pub publish --dry-run
+
+  publish:
+    name: Publish Package
+    needs: test
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.0"
+          channel: "stable"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Setup Pub Credentials
+        shell: bash
+        env:
+          PUB_DEV_PUBLISH_ACCESS_TOKEN: ${{ secrets.PUB_DEV_PUBLISH_ACCESS_TOKEN }}
+          PUB_DEV_PUBLISH_REFRESH_TOKEN: ${{ secrets.PUB_DEV_PUBLISH_REFRESH_TOKEN }}
+          PUB_DEV_PUBLISH_TOKEN_ENDPOINT: ${{ secrets.PUB_DEV_PUBLISH_TOKEN_ENDPOINT }}
+          PUB_DEV_PUBLISH_EXPIRATION: ${{ secrets.PUB_DEV_PUBLISH_EXPIRATION }}
+        run: |
+          sh -c "mkdir -p ~/.pub-cache"
+          cat <<EOF > ~/.pub-cache/credentials.json
+          {
+            "accessToken":"$PUB_DEV_PUBLISH_ACCESS_TOKEN",
+            "refreshToken":"$PUB_DEV_PUBLISH_REFRESH_TOKEN",
+            "tokenEndpoint":"$PUB_DEV_PUBLISH_TOKEN_ENDPOINT",
+            "scopes":["https://www.googleapis.com/auth/userinfo.email","openid"],
+            "expiration":$PUB_DEV_PUBLISH_EXPIRATION
+          }
+          EOF
+
+      - name: Publish package
+        run: dart pub publish --force
+
+  create-release:
+    name: Create GitHub Release
+    needs: publish
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release v${{ steps.get_version.outputs.VERSION }}
+          body: |
+            ## 🚀 cache_manager_lite v${{ steps.get_version.outputs.VERSION }}
+
+            ### 📦 Installation
+            ```yaml
+            dependencies:
+              cache_manager_lite: ^${{ steps.get_version.outputs.VERSION }}
+            ```
+
+            ### 📋 What's New
+            - See [CHANGELOG.md](https://github.com/Kidpech-code/cache_manager_lite/blob/main/CHANGELOG.md) for detailed changes
+
+            ### 🌐 Documentation
+            - [🇺🇸 English](https://github.com/Kidpech-code/cache_manager_lite#readme)
+            - [🇹🇭 ไทย / Thai](https://github.com/Kidpech-code/cache_manager_lite/blob/main/doc/README.th.md)
+            - [🇨🇳 中文 / Chinese](https://github.com/Kidpech-code/cache_manager_lite/blob/main/doc/README.cn.md)
+            - [🇲🇲 မြန်မာ / Myanmar](https://github.com/Kidpech-code/cache_manager_lite/blob/main/doc/README.mm.md)
+            - [🇸🇬 Melayu / Singapore](https://github.com/Kidpech-code/cache_manager_lite/blob/main/doc/README.sg.md)
+            - [🇱🇦 ລາວ / Lao](https://github.com/Kidpech-code/cache_manager_lite/blob/main/doc/README.la.md)
+
+            ### 📱 Platform Support
+            - ✅ Android
+            - ✅ iOS  
+            - ✅ macOS
+            - ✅ Windows
+            - ✅ Linux
+            - ✅ Web
+
+            ### 🔗 Links
+            - [📦 pub.dev](https://pub.dev/packages/cache_manager_lite)
+            - [📖 Documentation](https://github.com/Kidpech-code/cache_manager_lite#readme)
+            - [🐛 Report Issues](https://github.com/Kidpech-code/cache_manager_lite/issues)
+          draft: false
+          prerelease: ${{ contains(steps.get_version.outputs.VERSION, '-') }}

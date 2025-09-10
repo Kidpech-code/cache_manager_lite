@@ -20,7 +20,8 @@ class _CacheExpirationExampleState extends State<CacheExpirationExample> {
   @override
   void initState() {
     super.initState();
-    cacheManager = CacheManagerLite.forAdvanced(appType: AppType.utility, cacheSize: CacheSize.medium);
+    cacheManager = CacheManagerLite.forAdvanced(
+        appType: AppType.utility, cacheSize: CacheSize.medium);
   }
 
   void _addLog(String message) {
@@ -38,7 +39,10 @@ class _CacheExpirationExampleState extends State<CacheExpirationExample> {
     // 1. ใช้ Duration
     await cacheManager.put(
       key: 'test_duration',
-      value: {'type': 'duration_test', 'created': DateTime.now().toIso8601String()},
+      value: {
+        'type': 'duration_test',
+        'created': DateTime.now().toIso8601String()
+      },
       maxAge: Duration(seconds: 10),
     );
     _addLog('✅ สร้างแคชด้วย Duration (10 วินาที)');
@@ -47,7 +51,10 @@ class _CacheExpirationExampleState extends State<CacheExpirationExample> {
     final specificTime = DateTime.now().add(Duration(seconds: 15));
     await cacheManager.putWithExpirationTime(
       key: 'test_specific_time',
-      value: {'type': 'specific_time_test', 'expires_at': specificTime.toIso8601String()},
+      value: {
+        'type': 'specific_time_test',
+        'expires_at': specificTime.toIso8601String()
+      },
       expirationTime: specificTime,
     );
     _addLog('✅ สร้างแคชด้วยเวลาเฉพาะ (15 วินาที)');
@@ -59,16 +66,26 @@ class _CacheExpirationExampleState extends State<CacheExpirationExample> {
     _addLog('🔧 เริ่มทดสอบ Convenience Methods...');
 
     // ทดสอบ methods ต่างๆ
-    await cacheManager.putForMinutes(key: 'expires_in_minutes', value: {'type': 'minutes', 'data': 'expires in 2 minutes'}, minutes: 2);
+    await cacheManager.putForMinutes(
+        key: 'expires_in_minutes',
+        value: {'type': 'minutes', 'data': 'expires in 2 minutes'},
+        minutes: 2);
     _addLog('✅ สร้างแคชหมดอายุใน 2 นาที');
 
-    await cacheManager.putForHours(key: 'expires_in_hours', value: {'type': 'hours', 'data': 'expires in 1 hour'}, hours: 1);
+    await cacheManager.putForHours(
+        key: 'expires_in_hours',
+        value: {'type': 'hours', 'data': 'expires in 1 hour'},
+        hours: 1);
     _addLog('✅ สร้างแคชหมดอายุใน 1 ชั่วโมง');
 
-    await cacheManager.putUntilEndOfDay(key: 'expires_end_of_day', value: {'type': 'end_of_day', 'data': 'expires at end of day'});
+    await cacheManager.putUntilEndOfDay(
+        key: 'expires_end_of_day',
+        value: {'type': 'end_of_day', 'data': 'expires at end of day'});
     _addLog('✅ สร้างแคชหมดอายุเมื่อสิ้นวัน');
 
-    await cacheManager.putPermanent(key: 'permanent_cache', value: {'type': 'permanent', 'data': 'never expires (practically)'});
+    await cacheManager.putPermanent(
+        key: 'permanent_cache',
+        value: {'type': 'permanent', 'data': 'never expires (practically)'});
     _addLog('✅ สร้างแคชถาวร (ไม่หมดอายุ)');
 
     await _updateCacheStatus();
@@ -78,9 +95,14 @@ class _CacheExpirationExampleState extends State<CacheExpirationExample> {
     _addLog('🔧 เริ่มทดสอบฟีเจอร์ขั้นสูง...');
 
     // สร้างแคชด้วย custom policy
-    final customPolicy = CachePolicy.expiresAt(expirationTime: DateTime.now().add(Duration(seconds: 30)), encryptionKey: 'secure_key_123');
+    final customPolicy = CachePolicy.expiresAt(
+        expirationTime: DateTime.now().add(Duration(seconds: 30)),
+        encryptionKey: 'secure_key_123');
 
-    await cacheManager.put(key: 'custom_policy_cache', value: {'sensitive_data': 'encrypted content', 'id': 12345}, policy: customPolicy);
+    await cacheManager.put(
+        key: 'custom_policy_cache',
+        value: {'sensitive_data': 'encrypted content', 'id': 12345},
+        policy: customPolicy);
     _addLog('✅ สร้างแคชด้วย Custom Policy + การเข้ารหัส');
 
     // ทดสอบการขยายเวลา
@@ -93,7 +115,8 @@ class _CacheExpirationExampleState extends State<CacheExpirationExample> {
 
     // ขยายเวลาหลังจาก 5 วินาที
     Future.delayed(Duration(seconds: 5), () async {
-      final extended = await cacheManager.extendExpiration(key: 'extendable_cache', additionalTime: Duration(seconds: 30));
+      final extended = await cacheManager.extendExpiration(
+          key: 'extendable_cache', additionalTime: Duration(seconds: 30));
       if (extended) {
         _addLog('⏰ ขยายเวลาแคช "extendable_cache" เพิ่ม 30 วินาที');
         await _updateCacheStatus();
@@ -167,7 +190,10 @@ class _CacheExpirationExampleState extends State<CacheExpirationExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Cache Expiration Management'), backgroundColor: Colors.purple, foregroundColor: Colors.white),
+      appBar: AppBar(
+          title: Text('Cache Expiration Management'),
+          backgroundColor: Colors.purple,
+          foregroundColor: Colors.white),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -188,19 +214,23 @@ class _CacheExpirationExampleState extends State<CacheExpirationExample> {
                   onPressed: _demonstrateConvenienceMethods,
                   icon: Icon(Icons.schedule),
                   label: Text('Convenience Methods'),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
                 ),
                 ElevatedButton.icon(
                   onPressed: _demonstrateAdvancedFeatures,
                   icon: Icon(Icons.settings),
                   label: Text('Advanced Features'),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.orange),
                 ),
                 ElevatedButton.icon(
                   onPressed: isMonitoring ? _stopMonitoring : _startMonitoring,
                   icon: Icon(isMonitoring ? Icons.stop : Icons.play_arrow),
                   label: Text(isMonitoring ? 'Stop Monitor' : 'Start Monitor'),
-                  style: ElevatedButton.styleFrom(backgroundColor: isMonitoring ? Colors.red : Colors.purple),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          isMonitoring ? Colors.red : Colors.purple),
                 ),
                 ElevatedButton.icon(
                   onPressed: _clearAllCache,
@@ -215,9 +245,9 @@ class _CacheExpirationExampleState extends State<CacheExpirationExample> {
 
             // Cache entries status
             if (cacheEntries.isNotEmpty) ...[
-              Text('Cache Entries Status:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text('Cache Entries Status:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               SizedBox(height: 8),
-
               Expanded(
                 flex: 2,
                 child: ListView.builder(
@@ -231,35 +261,46 @@ class _CacheExpirationExampleState extends State<CacheExpirationExample> {
                       margin: EdgeInsets.symmetric(vertical: 4),
                       color: info.isExpired
                           ? Colors.red.shade50
-                          : info.remainingTime != null && info.remainingTime!.inSeconds < 30
-                          ? Colors.yellow.shade50
-                          : Colors.green.shade50,
+                          : info.remainingTime != null &&
+                                  info.remainingTime!.inSeconds < 30
+                              ? Colors.yellow.shade50
+                              : Colors.green.shade50,
                       child: ListTile(
                         title: Text(
                           key,
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, decoration: info.isExpired ? TextDecoration.lineThrough : null),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              decoration: info.isExpired
+                                  ? TextDecoration.lineThrough
+                                  : null),
                         ),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Status: ${info.statusDescription}'),
-                            if (info.expiresAt != null) Text('Expires: ${info.expiresAt!.toString().substring(11, 19)}'),
+                            if (info.expiresAt != null)
+                              Text(
+                                  'Expires: ${info.expiresAt!.toString().substring(11, 19)}'),
                             Text('Age: ${info.age.inSeconds}s'),
                             if (info.isEncrypted)
                               Row(
                                 children: [
-                                  Icon(Icons.lock, size: 16, color: Colors.orange),
+                                  Icon(Icons.lock,
+                                      size: 16, color: Colors.orange),
                                   SizedBox(width: 4),
-                                  Text('Encrypted', style: TextStyle(color: Colors.orange)),
+                                  Text('Encrypted',
+                                      style: TextStyle(color: Colors.orange)),
                                 ],
                               ),
                           ],
                         ),
                         trailing: info.isExpired
                             ? Icon(Icons.close, color: Colors.red)
-                            : info.remainingTime != null && info.remainingTime!.inSeconds < 30
-                            ? Icon(Icons.warning, color: Colors.orange)
-                            : Icon(Icons.check, color: Colors.green),
+                            : info.remainingTime != null &&
+                                    info.remainingTime!.inSeconds < 30
+                                ? Icon(Icons.warning, color: Colors.orange)
+                                : Icon(Icons.check, color: Colors.green),
                       ),
                     );
                   },
@@ -271,9 +312,9 @@ class _CacheExpirationExampleState extends State<CacheExpirationExample> {
 
             // Logs
             if (logs.isNotEmpty) ...[
-              Text('Operation Logs:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              Text('Operation Logs:',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               SizedBox(height: 8),
-
               Expanded(
                 child: Container(
                   width: double.infinity,
@@ -289,7 +330,9 @@ class _CacheExpirationExampleState extends State<CacheExpirationExample> {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: EdgeInsets.symmetric(vertical: 1),
-                        child: Text(logs[logs.length - 1 - index], style: TextStyle(fontSize: 12, fontFamily: 'monospace')),
+                        child: Text(logs[logs.length - 1 - index],
+                            style: TextStyle(
+                                fontSize: 12, fontFamily: 'monospace')),
                       );
                     },
                   ),

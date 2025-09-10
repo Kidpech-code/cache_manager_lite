@@ -337,9 +337,8 @@ class _UserLevelExampleState extends State<UserLevelExample> {
                     width: 200,
                     margin: EdgeInsets.only(right: 12),
                     child: Card(
-                      color: isSelected
-                          ? config['color']
-                          : Colors.grey.shade100,
+                      color:
+                          isSelected ? config['color'] : Colors.grey.shade100,
                       child: InkWell(
                         onTap: () => _selectUserLevel(level),
                         child: Padding(
@@ -349,9 +348,8 @@ class _UserLevelExampleState extends State<UserLevelExample> {
                             children: [
                               Icon(
                                 config['icon'],
-                                color: isSelected
-                                    ? Colors.white
-                                    : config['color'],
+                                color:
+                                    isSelected ? Colors.white : config['color'],
                                 size: 32,
                               ),
                               SizedBox(height: 8),
@@ -419,7 +417,6 @@ class _UserLevelExampleState extends State<UserLevelExample> {
                     SizedBox(height: 8),
                     Text(levelInfo!['description']),
                     SizedBox(height: 12),
-
                     Row(
                       children: [
                         Expanded(
@@ -495,7 +492,6 @@ class _UserLevelExampleState extends State<UserLevelExample> {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
-
               Expanded(
                 child: Container(
                   width: double.infinity,

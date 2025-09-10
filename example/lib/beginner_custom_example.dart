@@ -51,13 +51,15 @@ class CustomCacheDemoState extends State<CustomCacheDemo> {
   Widget build(BuildContext context) {
     if (!_isInitialized) {
       return Scaffold(
-        appBar: AppBar(title: Text('Todo App with Cache'), backgroundColor: Colors.purple),
+        appBar: AppBar(
+            title: Text('Todo App with Cache'), backgroundColor: Colors.purple),
         body: Center(child: CircularProgressIndicator()),
       );
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text('Todo App with Cache'), backgroundColor: Colors.purple),
+      appBar: AppBar(
+          title: Text('Todo App with Cache'), backgroundColor: Colors.purple),
       body: Column(
         children: [
           // ส่วนเพิ่ม Todo ใหม่
@@ -68,7 +70,9 @@ class CustomCacheDemoState extends State<CustomCacheDemo> {
                 Expanded(
                   child: TextField(
                     controller: _controller,
-                    decoration: InputDecoration(hintText: 'เพิ่มรายการใหม่...', border: OutlineInputBorder()),
+                    decoration: InputDecoration(
+                        hintText: 'เพิ่มรายการใหม่...',
+                        border: OutlineInputBorder()),
                     onSubmitted: (_) => _addTodo(),
                   ),
                 ),
@@ -86,7 +90,8 @@ class CustomCacheDemoState extends State<CustomCacheDemo> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: _saveTodoList,
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.green),
                     child: Text('บันทึก (24 ชั่วโมง)'),
                   ),
                 ),
@@ -94,7 +99,8 @@ class CustomCacheDemoState extends State<CustomCacheDemo> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: _clearAll,
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.red),
                     child: Text('ล้างทั้งหมด'),
                   ),
                 ),
@@ -116,7 +122,9 @@ class CustomCacheDemoState extends State<CustomCacheDemo> {
                 Icon(Icons.info, color: Colors.blue),
                 SizedBox(width: 8),
                 Expanded(
-                  child: Text('รายการจะถูกบันทึกอัตโนมัติและหมดอายุใน 24 ชั่วโมง', style: TextStyle(color: Colors.blue[700])),
+                  child: Text(
+                      'รายการจะถูกบันทึกอัตโนมัติและหมดอายุใน 24 ชั่วโมง',
+                      style: TextStyle(color: Colors.blue[700])),
                 ),
               ],
             ),
@@ -131,9 +139,11 @@ class CustomCacheDemoState extends State<CustomCacheDemo> {
                       children: [
                         Icon(Icons.list_alt, size: 64, color: Colors.grey),
                         SizedBox(height: 16),
-                        Text('ไม่มีรายการ Todo', style: TextStyle(fontSize: 18, color: Colors.grey)),
+                        Text('ไม่มีรายการ Todo',
+                            style: TextStyle(fontSize: 18, color: Colors.grey)),
                         SizedBox(height: 8),
-                        Text('ลองเพิ่มรายการใหม่ข้างบน', style: TextStyle(fontSize: 14, color: Colors.grey)),
+                        Text('ลองเพิ่มรายการใหม่ข้างบน',
+                            style: TextStyle(fontSize: 14, color: Colors.grey)),
                       ],
                     ),
                   )
@@ -141,9 +151,13 @@ class CustomCacheDemoState extends State<CustomCacheDemo> {
                     itemCount: _todoList.length,
                     itemBuilder: (context, index) {
                       return Card(
-                        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                         child: ListTile(
-                          leading: CircleAvatar(backgroundColor: Colors.purple, foregroundColor: Colors.white, child: Text('${index + 1}')),
+                          leading: CircleAvatar(
+                              backgroundColor: Colors.purple,
+                              foregroundColor: Colors.white,
+                              child: Text('${index + 1}')),
                           title: Text(_todoList[index]),
                           trailing: IconButton(
                             icon: Icon(Icons.delete, color: Colors.red),
@@ -164,7 +178,8 @@ class CustomCacheDemoState extends State<CustomCacheDemo> {
               children: [
                 Icon(Icons.check_circle, color: Colors.green, size: 20),
                 SizedBox(width: 8),
-                Text('รายการทั้งหมด: ${_todoList.length} รายการ', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('รายการทั้งหมด: ${_todoList.length} รายการ',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
           ),
@@ -232,7 +247,10 @@ class CustomCacheDemoState extends State<CustomCacheDemo> {
     // แสดงข้อความเฉพาะเมื่อกดปุ่มบันทึกเท่านั้น
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('บันทึกรายการ Todo แล้ว (หมดอายุใน 24 ชั่วโมง)'), backgroundColor: Colors.green, duration: Duration(seconds: 2)),
+        SnackBar(
+            content: Text('บันทึกรายการ Todo แล้ว (หมดอายุใน 24 ชั่วโมง)'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 2)),
       );
     }
   }
@@ -250,7 +268,8 @@ class CustomCacheDemoState extends State<CustomCacheDemo> {
       if (_todoList.isNotEmpty && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('โหลดรายการ Todo จากแคชแล้ว (${_todoList.length} รายการ)'),
+            content:
+                Text('โหลดรายการ Todo จากแคชแล้ว (${_todoList.length} รายการ)'),
             backgroundColor: Colors.blue,
             duration: Duration(seconds: 2),
           ),
@@ -269,7 +288,9 @@ class CustomCacheDemoState extends State<CustomCacheDemo> {
           title: Text('ยืนยันการลบ'),
           content: Text('คุณต้องการลบรายการ Todo ทั้งหมดหรือไม่?'),
           actions: [
-            TextButton(onPressed: () => Navigator.of(context).pop(false), child: Text('ยกเลิก')),
+            TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text('ยกเลิก')),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
               style: TextButton.styleFrom(foregroundColor: Colors.red),
@@ -286,7 +307,9 @@ class CustomCacheDemoState extends State<CustomCacheDemo> {
         _todoList.clear();
       });
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('ล้างข้อมูลทั้งหมดแล้ว!'), backgroundColor: Colors.red));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('ล้างข้อมูลทั้งหมดแล้ว!'),
+          backgroundColor: Colors.red));
     }
   }
 }

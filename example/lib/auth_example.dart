@@ -181,7 +181,8 @@ class _AuthenticationExampleState extends State<AuthenticationExample> {
                         height: 20,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
                         ),
                       ),
                       SizedBox(width: 12),
@@ -291,7 +292,8 @@ class _AuthenticationExampleState extends State<AuthenticationExample> {
               _buildInfoRow('ID', _userProfile?['id']?.toString() ?? '-'),
               _buildInfoRow('ชื่อผู้ใช้', _userProfile?['username'] ?? '-'),
               _buildInfoRow('อีเมล', _userProfile?['email'] ?? '-'),
-              _buildInfoRow('เข้าสู่ระบบล่าสุด', _userProfile?['lastLogin'] ?? '-'),
+              _buildInfoRow(
+                  'เข้าสู่ระบบล่าสุด', _userProfile?['lastLogin'] ?? '-'),
             ],
           ),
 
@@ -330,7 +332,8 @@ class _AuthenticationExampleState extends State<AuthenticationExample> {
     );
   }
 
-  Widget _buildSectionCard({required String title, required List<Widget> children}) {
+  Widget _buildSectionCard(
+      {required String title, required List<Widget> children}) {
     return Card(
       child: Padding(
         padding: EdgeInsets.all(16),
@@ -394,7 +397,8 @@ class _AuthenticationExampleState extends State<AuthenticationExample> {
             else if (snapshot.hasError)
               Text('Error: ${snapshot.error}')
             else if (snapshot.hasData) ...[
-              for (var item in snapshot.data!) _buildInfoRow(item['key'], item['status']),
+              for (var item in snapshot.data!)
+                _buildInfoRow(item['key'], item['status']),
             ] else
               Text('ไม่มีข้อมูล Cache'),
           ],
@@ -480,7 +484,8 @@ class _AuthenticationExampleState extends State<AuthenticationExample> {
           _accessToken = accessToken;
           _refreshToken = refreshToken;
           _userProfile = Map<String, dynamic>.from(userProfile);
-          _tokenExpiry = tokenExpiryStr != null ? DateTime.parse(tokenExpiryStr) : null;
+          _tokenExpiry =
+              tokenExpiryStr != null ? DateTime.parse(tokenExpiryStr) : null;
         });
 
         // ตรวจสอบว่า token หมดอายุหรือไม่
@@ -591,7 +596,12 @@ class _AuthenticationExampleState extends State<AuthenticationExample> {
   }
 
   Future<List<Map<String, dynamic>>> _getCacheStatus() async {
-    final keys = ['access_token', 'refresh_token', 'user_profile', 'token_expiry'];
+    final keys = [
+      'access_token',
+      'refresh_token',
+      'user_profile',
+      'token_expiry'
+    ];
     final List<Map<String, dynamic>> status = [];
 
     for (final key in keys) {
@@ -600,7 +610,9 @@ class _AuthenticationExampleState extends State<AuthenticationExample> {
 
       status.add({
         'key': key,
-        'status': exists ? 'มีข้อมูล${info?.remainingTime != null ? " (เหลือ ${_formatDuration(info!.remainingTime!)})" : ""}' : 'ไม่มีข้อมูล',
+        'status': exists
+            ? 'มีข้อมูล${info?.remainingTime != null ? " (เหลือ ${_formatDuration(info!.remainingTime!)})" : ""}'
+            : 'ไม่มีข้อมูล',
       });
     }
 
@@ -629,7 +641,8 @@ class _AuthenticationExampleState extends State<AuthenticationExample> {
           'name': 'ผู้ใช้ทั่วไป',
           'email': 'user@example.com',
           'role': 'User',
-          'lastLogin': DateTime.now().subtract(Duration(minutes: 30)).toString(),
+          'lastLogin':
+              DateTime.now().subtract(Duration(minutes: 30)).toString(),
         }
       },
       'demo': {
@@ -645,7 +658,8 @@ class _AuthenticationExampleState extends State<AuthenticationExample> {
       },
     };
 
-    if (users.containsKey(username) && users[username]!['password'] == password) {
+    if (users.containsKey(username) &&
+        users[username]!['password'] == password) {
       return {
         'accessToken': _generateToken(),
         'refreshToken': _generateToken(),
@@ -658,8 +672,10 @@ class _AuthenticationExampleState extends State<AuthenticationExample> {
 
   String _generateToken() {
     final random = Random();
-    final chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    return List.generate(32, (index) => chars[random.nextInt(chars.length)]).join();
+    final chars =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    return List.generate(32, (index) => chars[random.nextInt(chars.length)])
+        .join();
   }
 
   String _maskedToken(String? token) {

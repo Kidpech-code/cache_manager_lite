@@ -31,7 +31,8 @@ class _CacheDemoState extends State<CacheDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Cache Manager Demo'), backgroundColor: Colors.blue),
+      appBar: AppBar(
+          title: Text('Cache Manager Demo'), backgroundColor: Colors.blue),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -39,7 +40,9 @@ class _CacheDemoState extends State<CacheDemo> {
           children: [
             // ช่องป้อนข้อมูล
             TextField(
-              decoration: InputDecoration(labelText: 'ป้อนข้อมูลที่ต้องการแคช', border: OutlineInputBorder()),
+              decoration: InputDecoration(
+                  labelText: 'ป้อนข้อมูลที่ต้องการแคช',
+                  border: OutlineInputBorder()),
               onChanged: (value) {
                 _inputText = value;
               },
@@ -47,7 +50,9 @@ class _CacheDemoState extends State<CacheDemo> {
             SizedBox(height: 16),
 
             // ปุ่มบันทึกข้อมูล
-            ElevatedButton(onPressed: _saveData, child: Text('บันทึกข้อมูล (หมดอายุใน 1 ชั่วโมง)')),
+            ElevatedButton(
+                onPressed: _saveData,
+                child: Text('บันทึกข้อมูล (หมดอายุใน 1 ชั่วโมง)')),
             SizedBox(height: 16),
 
             // ปุ่มดึงข้อมูล
@@ -76,7 +81,8 @@ class _CacheDemoState extends State<CacheDemo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('ข้อมูลจากแคช:', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('ข้อมูลจากแคช:',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                   SizedBox(height: 8),
                   Text(_cachedData.isEmpty ? 'ไม่มีข้อมูล' : _cachedData),
                 ],
@@ -92,9 +98,11 @@ class _CacheDemoState extends State<CacheDemo> {
   Future<void> _saveData() async {
     if (_inputText.isNotEmpty) {
       // บันทึกข้อมูลโดยหมดอายุใน 1 ชั่วโมง
-      await cacheManager.putForHours(key: 'user_data', value: _inputText, hours: 1);
+      await cacheManager.putForHours(
+          key: 'user_data', value: _inputText, hours: 1);
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('บันทึกข้อมูลสำเร็จ!')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('บันทึกข้อมูลสำเร็จ!')));
     }
   }
 
@@ -113,6 +121,7 @@ class _CacheDemoState extends State<CacheDemo> {
       _cachedData = '';
     });
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('ล้างข้อมูลทั้งหมดแล้ว!')));
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text('ล้างข้อมูลทั้งหมดแล้ว!')));
   }
 }

@@ -176,10 +176,10 @@ class CachePolicy {
   ///
   /// **หมายเหตุ:** ต้องระบุอย่างน้อย maxAge หรือ expiresAt อย่างใดอย่างหนึ่ง
   CachePolicy({this.maxAge, this.expiresAt, this.encryptionKey, this.maxSize})
-    : assert(
-        maxAge != null || expiresAt != null,
-        'Either maxAge or expiresAt must be provided',
-      );
+      : assert(
+          maxAge != null || expiresAt != null,
+          'Either maxAge or expiresAt must be provided',
+        );
 
   /// Factory constructor for creating a policy with duration from now.
   /// ตัวสร้างแฟกทอรีสำหรับสร้างนโยบายด้วยระยะเวลาจากเวลาปัจจุบัน

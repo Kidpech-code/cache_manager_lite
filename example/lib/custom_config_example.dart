@@ -413,7 +413,6 @@ class _CustomConfigExampleState extends State<CustomConfigExample> {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
-
               Expanded(
                 child: Container(
                   width: double.infinity,

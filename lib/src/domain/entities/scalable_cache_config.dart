@@ -438,8 +438,7 @@ class ScalableCacheConfig {
   CacheConfig toCacheConfig() {
     return CacheConfig(
       maxCacheSize: cacheSizeBytes,
-      defaultPolicy:
-          customCachePolicy ??
+      defaultPolicy: customCachePolicy ??
           CachePolicy(
             maxAge: defaultCacheDuration,
             encryptionKey: enableEncryption ? defaultEncryptionKey : null,
