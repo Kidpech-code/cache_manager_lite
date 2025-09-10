@@ -97,8 +97,8 @@ git add .
 git commit -m "chore: prepare for release"
 
 # Create and push tag (replace 0.1.0 with your version)
-git tag -a v0.1.1 -m "Release v0.1.1"
-git push origin v0.1.1
+git tag -a v0.1.2 -m "Release v0.1.2"
+git push origin v0.1.2
 ```
 
 ## 🔄 Step 4: Monitor the Publishing Process
@@ -118,7 +118,7 @@ After creating a tag, the automation will:
 
 ### Automatic Triggers:
 
-- ✅ **Git Tag Push**: `v*.*.*` (e.g., v0.1.1, v0.1.1)
+- ✅ **Git Tag Push**: `v*.*.*` (e.g., v0.1.2, v0.1.2)
 - ✅ **Manual Trigger**: Can be run manually with version input
 
 ### Workflow Steps:
@@ -159,14 +159,14 @@ After creating a tag, the automation will:
 
 ```bash
 # Delete local tag
-git tag -d v0.1.1
+git tag -d v0.1.2
 
 # Delete remote tag (be careful!)
-git push origin --delete v0.1.1
+git push origin --delete v0.1.2
 
 # Create new tag
-git tag -a v0.1.1 -m "Release v0.1.1"
-git push origin v0.1.1
+git tag -a v0.1.2 -m "Release v0.1.2"
+git push origin v0.1.2
 ```
 
 ## 🎯 Best Practices

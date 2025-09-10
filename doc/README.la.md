@@ -29,7 +29,7 @@
 
 ```yaml
 dependencies:
-  cache_manager_lite: ^0.1.1
+  cache_manager_lite: ^0.1.2
 ```
 
 ຈາກນັ້ນແລ່ນ:
@@ -64,7 +64,7 @@ cd my_cache_app
 dependencies:
   flutter:
     sdk: flutter
-  cache_manager_lite: ^0.1.1 # ເພີ່ມແຖວນີ້
+  cache_manager_lite: ^0.1.2 # ເພີ່ມແຖວນີ້
 
 dev_dependencies:
   flutter_test:
