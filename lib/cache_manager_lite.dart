@@ -1091,7 +1091,8 @@ class CacheManagerLite {
     // Create effective cache policy
     CachePolicy? effectivePolicy = policy;
 
-    if (effectivePolicy == null && (maxAge != null || expiresAt != null || encryptionKey != null)) {
+    if (effectivePolicy == null &&
+        (maxAge != null || expiresAt != null || encryptionKey != null)) {
       if (expiresAt != null) {
         effectivePolicy = CachePolicy.expiresAt(
           expirationTime: expiresAt,
@@ -1114,7 +1115,8 @@ class CacheManagerLite {
       key: key,
       value: _encryptIfNeeded(value, effectivePolicy),
       createdAt: DateTime.now(),
-      expiresAt: effectivePolicy?.getExpirationTime() ?? effectiveConfig.defaultPolicy.getExpirationTime(),
+      expiresAt: effectivePolicy?.getExpirationTime() ??
+          effectiveConfig.defaultPolicy.getExpirationTime(),
       isEncrypted: effectivePolicy?.encryptionKey != null,
     );
     await _putCacheUseCase(entry);

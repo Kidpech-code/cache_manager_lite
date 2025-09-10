@@ -45,7 +45,9 @@ class HiveDataSource {
   /// Gets all cache entries from Hive.
   /// รับรายการแคชทั้งหมดจาก Hive
   Future<List<CacheEntry>> getAll() async {
-    return _box.values.map((e) => CacheEntry.fromJson(Map<String, dynamic>.from(e))).toList();
+    return _box.values
+        .map((e) => CacheEntry.fromJson(Map<String, dynamic>.from(e)))
+        .toList();
   }
 
   /// Checks if a key exists in Hive.
