@@ -3,7 +3,17 @@
 ### Added
 - Version bump to 0.1.1
 
-## [0.1.0] - 2024-09-10 - Initial R### 📦 Dependencies
+### Fixed
+- **WASM Compatibility**: Implemented platform-specific imports to support WebAssembly runtime
+- **Conditional Dependencies**: Added platform-aware storage initialization for Web/WASM platforms
+- **Removed dart:io Dependencies**: Eliminated WASM-incompatible imports for web compatibility
+
+### Technical Changes
+- Added platform-specific implementations (io.dart, web.dart, stub.dart)
+- Implemented conditional imports for Hive storage backends
+- Maintained full functionality across all platforms (Android, iOS, macOS, Windows, Linux, Web, WASM)
+
+## [0.1.0] - 2024-09-10 - Initial Release### 📦 Dependencies
 
 - `hive: ^2.2.3` - High-perf### 🔒 Security Features
 

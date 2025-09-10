@@ -32,7 +32,6 @@ export 'src/domain/entities/cache_entry.dart';
 export 'src/domain/entities/cache_policy.dart';
 export 'src/domain/entities/scalable_cache_config.dart';
 import 'package:dio/dio.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import 'src/data/datasources/dio_cache_interceptor.dart';
 import 'src/data/datasources/dio_data_source.dart';
@@ -962,7 +961,6 @@ class CacheManagerLite {
   /// Initializes the cache manager.
   /// เริ่มต้นตัวจัดการแคช
   Future<void> _initialize() async {
-    await Hive.initFlutter();
     _hiveDataSource = HiveDataSource();
     await _hiveDataSource.init();
     _repository = HiveCacheRepository(_hiveDataSource);
@@ -1093,8 +1091,7 @@ class CacheManagerLite {
     // Create effective cache policy
     CachePolicy? effectivePolicy = policy;
 
-    if (effectivePolicy == null &&
-        (maxAge != null || expiresAt != null || encryptionKey != null)) {
+    if (effectivePolicy == null && (maxAge != null || expiresAt != null || encryptionKey != null)) {
       if (expiresAt != null) {
         effectivePolicy = CachePolicy.expiresAt(
           expirationTime: expiresAt,
@@ -1117,8 +1114,7 @@ class CacheManagerLite {
       key: key,
       value: _encryptIfNeeded(value, effectivePolicy),
       createdAt: DateTime.now(),
-      expiresAt: effectivePolicy?.getExpirationTime() ??
-          effectiveConfig.defaultPolicy.getExpirationTime(),
+      expiresAt: effectivePolicy?.getExpirationTime() ?? effectiveConfig.defaultPolicy.getExpirationTime(),
       isEncrypted: effectivePolicy?.encryptionKey != null,
     );
     await _putCacheUseCase(entry);

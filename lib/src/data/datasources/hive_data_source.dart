@@ -1,15 +1,17 @@
 import 'package:hive/hive.dart';
 import '../../domain/entities/cache_entry.dart';
+import '../../platform/platform.dart';
 
-/// Data source for Hive-based cache storage.
-/// แหล่งข้อมูลสำหรับการจัดเก็บแคชที่ใช้ Hive
+/// Data source for Hive-based cache storage with WASM compatibility.
+/// แหล่งข้อมูลสำหรับการจัดเก็บแคชที่ใช้ Hive รองรับ WASM
 class HiveDataSource {
   late Box<Map> _box;
 
-  /// Initializes the Hive box.
-  /// เริ่มต้นกล่อง Hive
+  /// Initializes the Hive box with platform-specific implementation.
+  /// เริ่มต้นกล่อง Hive ด้วยการใช้งานที่เฉพาะเจาะจงแต่ละแพลตฟอร์ม
   Future<void> init() async {
-    _box = await Hive.openBox<Map>('cache_manager_lite');
+    await initializePlatformStorage();
+    _box = await getPlatformBox<Map>('cache_manager_lite');
   }
 
   /// Retrieves a cache entry from Hive.
@@ -43,9 +45,7 @@ class HiveDataSource {
   /// Gets all cache entries from Hive.
   /// รับรายการแคชทั้งหมดจาก Hive
   Future<List<CacheEntry>> getAll() async {
-    return _box.values
-        .map((e) => CacheEntry.fromJson(Map<String, dynamic>.from(e)))
-        .toList();
+    return _box.values.map((e) => CacheEntry.fromJson(Map<String, dynamic>.from(e))).toList();
   }
 
   /// Checks if a key exists in Hive.
