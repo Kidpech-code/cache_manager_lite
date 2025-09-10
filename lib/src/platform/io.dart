@@ -1,11 +1,12 @@
 /// IO platform implementation
 library;
 
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 
 /// Initialize Hive storage for IO platforms
 Future<void> initializeStorage() async {
-  await Hive.initFlutter();
+  // For IO platforms, Hive will automatically use appropriate storage location
+  // No explicit initialization needed - Hive handles platform-specific paths
 }
 
 /// Get Hive box for IO platforms
